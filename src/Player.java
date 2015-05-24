@@ -42,9 +42,14 @@ public class Player
 				x = x;
 				y = y;
 			}
+			else if(x + 1 < 40 && y - 1 >=0)
+			{
+				x++;
+				y--;
+			}
  		}
 		
-		if(down && right)
+		else if(down && right)
  		{
 			if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y += 1] == 1))
 			{
@@ -56,36 +61,13 @@ public class Player
 				x = x;
 				y = y;
 			}
- 		}
-		
-		if(right && up)
- 		{
-			if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y -= 1] == 1))
+			else if(x + 1 < 40 && y + 1 < 30)
 			{
-				x = x;
-				y = y;
-			}
-			else if((grid.grid[x - 1][y] == 1) || (grid.grid[x][y += 1] == 1))
-			{
-				x = x;
-				y = y;
+				x+=1;
+				y+=1;
 			}
  		}
-		if(right && down)
- 		{
-			if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y += 1] == 1))
-			{
-				x = x;
-				y = y;
-			}
-			else if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y -= 1] == 1))
-			{
-				x = x;
-				y = y;
-			}
-		}
-		else
-		if(right)
+		else if(right)
 			if(x + 1 < 30)
 			{
 				if(grid.grid[x + 1][y] == 1)
@@ -124,8 +106,7 @@ public class Player
 			{
 				x = x;
 			}
-		
-		if(up)
+			else if(up)
 			if(y - 1 > 0)
 			{
 				if(grid.grid[x][y - 1] == 1)
