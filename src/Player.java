@@ -33,12 +33,11 @@ public class Player
 	{
 		if(x == 38)
 		{
-			System.out.println("YOU WIN!!!");
 			Game.win();
 		}
-		if(x == 0)
+		if(x < 0)
 		{
-			Game.loose();
+			Game.lose();
 		}
 		else
 		{
