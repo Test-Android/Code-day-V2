@@ -8,7 +8,7 @@ public class Player
 					left,
 					right,
 					down;
-	private boolean alive, moving;
+	private boolean alive;
 	private int x,
 				y;
 	private int gravity;
@@ -22,7 +22,6 @@ public class Player
 		right = false;
 		down = false;
 		alive = true;
-		moving = false;
 		this.x = x;
 		this.y = y;
 		this.insetsLeft = insetsLeft;
@@ -31,60 +30,142 @@ public class Player
 
 	public void update()
 	{
-		if(x == 38)
-		{
-			System.out.println("YOU WIN!!!");
-		}
-		else
-		{
-			if(moving)
+		if(up && right)
+ 		{
+			if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y -= 1] == 1))
 			{
-				if(right && x + 1 < 39)
+				x = x;
+				y = y;
+			}
+			else if((grid.grid[x - 1][y] == 1) || (grid.grid[x][y += 1] == 1))
+			{
+				x = x;
+				y = y;
+			}
+			else if(x + 1 < 40 && y - 1 >=0)
+			{
+				x++;
+				y--;
+			}
+ 		}
+		
+		else if(down && right)
+ 		{
+			if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y += 1] == 1))
+			{
+				x = x;
+				y = y;
+			}
+			else if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y -= 1] == 1))
+			{
+				x = x;
+				y = y;
+			}
+			else if(x + 1 < 40 && y + 1 < 30)
+			{
+				x+=1;
+				y+=1;
+			}
+ 		}
+		
+		
+		else if(right)
+			if(x + 1 < 30)
+			{
+				if(grid.grid[x + 1][y] == 1)
 				{
-					if(grid.grid[x][y] == 1)
-						x--;
-					else
-						x++;
+					x -= 1;
+					System.out.println("cant move right");
 				}
-				else if(left && x - 1 >= 0)
+				else
 				{
-					if(grid.grid[x][y] == 1)
-						x--;
-					else
-						x--;
+					x += 1;
 				}
-				else if(up && y - 1 >= 0)
+			}
+			else if(grid.grid[x + 1][y] == 1)
+			{
+				x -= x;
+			}
+			else
+			{
+				x = x;
+			}
+		
+			else if(left)
+			if(x - 1 > 0)
+			{
+				if(grid.grid[x - 1][y] == 1)
 				{
-					if(grid.grid[x][y] == 1)
-					{
-						x--;
-						y--;
-					}
-					else
-						y--;
+					x += 1;
+					System.out.println("cant move left");
 				}
-				else if(down && y + 1 < 29)
+				else
 				{
-					if(grid.grid[x][y] == 1)
-					{
-						x--;
-						y++;
-					}	
-					else
-						y++;
+					x -= 1;
 				}
 			}
 			else
 			{
-				if(grid.grid[x][y] == 1)
+				x = x;
+			}
+			else if(up)
+			if(y - 1 > 0)
+			{
+				if(grid.grid[x][y - 1] == 1)
 				{
-					x--;
+					y = y;
 				}
+				else if(grid.grid[x + 1][y] == 1)
+				{
+					x -= 1;
+					y -= 1;
+				}
+				else
+				{
+					y -= 1;
+				}
+			}
+			else
+			{
+				y = y;
+			}
+	
+		else if(down)
+		{
+			if(y + 1 < 29)
+			{
+				if(grid.grid[x][y + 1] == 1)
+				{
+					y = y;
+				}
+				else if(grid.grid[x + 1][y] == 1)
+				{
+					x -= 1;
+					y += 1;
+
+				} 
+				else
+				{
+					y += 1;
+				}
+			}
+			else
+			{
+				y = y;
 			}
 		}
 		
-	 }
-	
+		
+		
+		if(!right && !down && !up && !left)
+		{
+			if(grid.grid[x + 1][y] == 1)
+			{
+				x -= 1;
+			}
+ 		}
+
+	}
 	public void render(Graphics2D bbg)
 	{
 		if(alive)
@@ -113,22 +194,18 @@ public class Player
 	public void setUp(boolean b)
 	{
 		up = b;
-		moving = b;
 	}
 	public void setLeft(boolean b)
 	{
 		left = b;
-		moving = b;
 	}
 	public void setRight(boolean b)
 	{
 		right = b;
-		moving = b;
 	}
 	public void setDown(boolean b)
 	{
 		down = b;
-		moving = b;
 	}
 	public void setState(boolean b)
 	{
