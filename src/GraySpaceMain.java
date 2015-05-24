@@ -149,5 +149,6 @@ public class GraySpaceMain extends JFrame
 		okay.setBounds(75,40,100,20);
 		bg.add(okay);
 		bg.setVisible(true);
+		bg.setLocationRelativeTo(null);
 	}
 }

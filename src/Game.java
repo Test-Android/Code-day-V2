@@ -27,7 +27,7 @@ public class Game extends JFrame implements Runnable
 	Player player;
 	static grid grid;
 	static int level = 1;
-	static boolean win;
+	static boolean win, lose;
 	static int speed;
 	
 	public Game(int speed)
@@ -44,9 +44,10 @@ public class Game extends JFrame implements Runnable
 		grid = new grid((GraySpaceMain.WIDTH / 16), (GraySpaceMain.HEIGHT / 16),player, getInsets().left, getInsets().top);
 		
 		this.speed = speed;
-		level = this.speed/10;
+		level = this.speed/100;
 		
 		win = false;
+		lose = false;
 		GraySpaceMain.bindKeys(this,player);
 	}
 	
@@ -102,15 +103,11 @@ public class Game extends JFrame implements Runnable
 		Graphics2D g = (Graphics2D)getGraphics();
         Graphics2D bbg = (Graphics2D)backBuffer.getGraphics();
         bbg.clearRect(0, 0,640 + getInsets().right, getInsets().bottom + 480);
-        if(!win)
+        if(win)
         {
-        	grid.render(bbg);
-            g.drawImage(backBuffer, 0, 0, this); 
-        }
-        else
-        {
+        	lose = false;
         	bbg.setFont(new Font("Arial",Font.BOLD,40));
-        	bbg.drawString("You beat level " + level + "!",240,240);
+        	bbg.drawString("You beat level " + level + "!",175,240);
             g.drawImage(backBuffer, 0, 0, this); 
             try
             {
@@ -118,7 +115,26 @@ public class Game extends JFrame implements Runnable
             	win = false;
             	grid.emptyGrid();
             } catch(Exception e){}
-
+        }
+        else if(lose)
+        {
+        	win = false;
+        	bbg.setFont(new Font("Arial",Font.BOLD,40));
+        	bbg.drawString("You lost :(",240,240);
+        	bbg.setFont(new Font("Arial", Font.BOLD,20));
+        	bbg.drawString("sorry starting over...", 240,300);
+            g.drawImage(backBuffer, 0, 0, this); 
+            try
+            {
+            	thread.sleep(5000);
+            	lose = false;
+            	grid.emptyGrid();
+            } catch(Exception e){}
+        }
+        else
+        {
+        	grid.render(bbg);
+            g.drawImage(backBuffer, 0, 0, this); 
         }
 	}
 	public static void win()
@@ -126,10 +142,10 @@ public class Game extends JFrame implements Runnable
 		win = true;
 		level++;
 		speed-=10;
-		
 	}
 	public static void lose()
 	{
+		lose = true;
 		grid.emptyGrid();
 		speed = 100;
 		level = 1;
