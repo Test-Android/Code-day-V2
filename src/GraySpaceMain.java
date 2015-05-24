@@ -4,9 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JRootPane;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 public class GraySpaceMain extends JFrame
@@ -32,8 +36,10 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
 				p.setUp(true);
+				p.setDown(false);
+				p.setRight(false);
+				p.setLeft(false);
 			}
 		});
 		j.getActionMap().put("releasedUP", new AbstractAction()
@@ -41,8 +47,6 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
-
 				p.setUp(false);
 			}	
 		});
@@ -51,8 +55,9 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
-
+				p.setUp(false);
+				p.setDown(false);
+				p.setRight(false);
 				p.setLeft(true);
 			}
 		});
@@ -61,8 +66,6 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
-
 				p.setLeft(false);
 			}	
 		});
@@ -72,9 +75,10 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
-
+				p.setUp(false);
+				p.setDown(false);
 				p.setRight(true);
+				p.setLeft(false);
 			}
 		});
 		j.getActionMap().put("releasedRIGHT", new AbstractAction()
@@ -82,8 +86,6 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
-
 				p.setRight(false);
 			}	
 		});
@@ -92,9 +94,10 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
-
+				p.setUp(false);
 				p.setDown(true);
+				p.setRight(false);
+				p.setLeft(false);
 			}
 		});
 		j.getActionMap().put("releasedDOWN", new AbstractAction()
@@ -102,8 +105,6 @@ public class GraySpaceMain extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("boop");
-
 				p.setDown(false);
 			}	
 		});
@@ -114,7 +115,40 @@ public class GraySpaceMain extends JFrame
 	}
 	public static void main(String args[])
 	{
-		Game game = new Game();
-		game.start();
+		JDialog bg = new JDialog();
+		bg.setBackground(Color.BLUE);
+		bg.setTitle("Settings");
+		bg.setLayout(null);
+		bg.setBounds(0,0,300,100);
+		JLabel info = new JLabel("Enter a number from one to ten.\nTen is slow, one is fast");
+		info.setBounds(0,0,300,20);
+		bg.add(info);
+		JTextArea speedText = new JTextArea("0");
+		speedText.setBounds(0,20,300,20);
+		bg.add(speedText);
+		JButton okay = new JButton();
+		okay.addActionListener(new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent arg0) 
+			{
+				int speed;
+				try
+				{
+					speed = Integer.parseInt(speedText.getText()) * 10;
+				}
+				catch(Exception e)
+				{
+					speed = 100;
+				}
+				bg.dispose();
+				Game game = new Game(speed);
+				game.start();
+			}
+		});
+		okay.setBounds(75,40,100,20);
+		bg.add(okay);
+		bg.setVisible(true);
+		bg.setLocationRelativeTo(null);
 	}
 }
