@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-//do you like the code
+//do you like the code   bc i do
 public class Player
 {
 	private boolean up,
