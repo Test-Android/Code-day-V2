@@ -7,7 +7,7 @@ import java.awt.Image;
 
 public class grid 
 {
-	int[][] grid ;
+	static int[][] grid ;
 	int x ,  y ;
 	final int mutiplyer16bit = 16 ;
 	int insetLeft;
