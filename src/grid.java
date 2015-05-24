@@ -19,6 +19,8 @@ public class grid
 	int columnX = 0;
 	int columnY = 0;
 	int colPhase = 0;
+	
+	int columnCount = 0;
 	public grid(int xvalue , int yvalue, Player p, int insetLeft, int insetTop)
 	{
 		this.insetLeft = insetLeft;
@@ -92,21 +94,26 @@ public class grid
 					cont = false;
 				}
 			}
-				
+			columnCount++;	
 		}
 	}
 	 public void update()
 	 {
-		for(int x = 0; x < this.x - 1; x++)
+		if(columnCount != 20)
 		{
-			for(int y =0; y < this.y; y++)
+			for(int x = 0; x < this.x - 1; x++)
 			{
-				grid[x][y] = grid[x + 1][y];
-				grid[x+1][y] = 0;
+				for(int y =0; y < this.y; y++)
+				{
+					grid[x][y] = grid[x + 1][y];
+					grid[x+1][y] = 0;
+				}
 			}
+			updatePlayer();
+			makenewcolumn();
 		}
-		updatePlayer();
-		makenewcolumn();
+		else
+			Game.win();
 	 }
 	 public void render(Graphics2D bbg)
 	 {
@@ -158,4 +165,13 @@ public class grid
 			 }
 		 }
 	 }
+
+	public void emptyGrid() 
+	{
+		grid = new int[40][30];
+		p.setX(0);
+		p.setY(15);
+		columnCount = 0;
+		
+	}
 }
