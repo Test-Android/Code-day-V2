@@ -42,7 +42,7 @@ public class Game extends JFrame implements Runnable
 		player = new Player(0,15,getInsets().left,getInsets().top);
 		grid = new grid((GraySpaceMain.WIDTH / 16), (GraySpaceMain.HEIGHT / 16),player, getInsets().left, getInsets().top);
 		
-		speed = 50;
+		speed = 100;
 		win = false;
 		GraySpaceMain.bindKeys(this,player);
 	}
@@ -145,6 +145,43 @@ public class Game extends JFrame implements Runnable
 	}
 	public void loose()
 	{
+		thread.stop();
+		Graphics2D g = (Graphics2D)getGraphics();
+		Graphics2D bbg = (Graphics2D)backBuffer.createGraphics();
+		bbg.clearRect(0, 0, 640, 480);
+		bbg.setFont(new Font("Arial",Font.BOLD,40));
+		bbg.drawString("You Lose!", 160, 320);
+		JDialog bg = new JDialog();
+		bg.setTitle("Want to continue?");
+		bg.setLayout(null);
+		JLabel info = new JLabel("Click okay to continue and start at level 1. \nHit stop to close out of the game.");
+		info.setBounds(0,100,400,200);
+		bg.add(info);
+		bg.setBounds(0, 0, 400, 400);
+		JButton okay = new JButton("Okay");
+		okay.addActionListener(new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				Game g = new Game();
+				g.start();
+			}
+		});
+		okay.setBounds(0,380,100,20);
+		bg.add(okay);
+		JButton stop = new JButton("Stop");
+		stop.addActionListener(new AbstractAction()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+			}
+		});
+		stop.setBounds(300,380,100,20);
+		bg.add(stop);
+		bg.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+		bg.setVisible(true);
 		
 	}
 	public void dispose()
