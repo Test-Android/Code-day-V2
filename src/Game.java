@@ -131,10 +131,6 @@ public class Game extends JFrame implements Runnable
 		speed = 100;
 		level = 1;
 	}
-	public void loose()
-	{
-		grid.emptyGrid();
-	}
 	public void dispose()
 	{
 		this.dispose();

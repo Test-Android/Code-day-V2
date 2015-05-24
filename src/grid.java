@@ -46,17 +46,6 @@ public class grid
 	}
 	public void updatePlayer()
 	{
-		if(grid[p.getX() + 1][p.getY()] == 1)
-		{
-			 if(p.getX() - 1 < 0)
-			 {
-				 p.setState(false);
-			 }
-			 else
-			 {
-				 p.setX(p.getX() - 2);
-			 }
-		}
 		p.update();
 	}
 	public void makenewcolumn()
@@ -165,7 +154,7 @@ public class grid
 		grid = new int[40][30];
 		p.setX(0);
 		p.setY(15);
-		columnCount = 0;
+		p.setState(true);
 		
 	}
 }
