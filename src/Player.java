@@ -8,7 +8,7 @@ public class Player
 					left,
 					right,
 					down;
-	private boolean alive;
+	private boolean alive, moving;
 	private int x,
 				y;
 	private int gravity;
@@ -22,6 +22,7 @@ public class Player
 		right = false;
 		down = false;
 		alive = true;
+		moving = false;
 		this.x = x;
 		this.y = y;
 		this.insetsLeft = insetsLeft;
@@ -30,6 +31,61 @@ public class Player
 
 	public void update()
 	{
+		if(x == 38)
+		{
+			System.out.println("YOU WIN!!!");
+		}
+		else
+		{
+			if(moving)
+			{
+				if(right && x + 1 < 39)
+				{
+					if(grid.grid[x][y] == 1)
+						x--;
+					else
+						x++;
+				}
+				else if(left && x - 1 >= 0)
+				{
+					if(grid.grid[x][y] == 1)
+						x--;
+					else
+						x--;
+				}
+				else if(up && y - 1 >= 0)
+				{
+					if(grid.grid[x][y] == 1)
+					{
+						x--;
+						y--;
+					}
+					else
+						y--;
+				}
+				else if(down && y + 1 < 29)
+				{
+					if(grid.grid[x][y] == 1)
+					{
+						x--;
+						y++;
+					}	
+					else
+						y++;
+				}
+			}
+			else
+			{
+				if(grid.grid[x][y] == 1)
+				{
+					x--;
+				}
+			}
+		}
+		
+	 }
+	
+		/*
 		if(up && right)
  		{
 			if((grid.grid[x + 1][y] == 1) || (grid.grid[x][y -= 1] == 1))
@@ -163,7 +219,7 @@ public class Player
 			}
  		}
 
-	}
+	}*/
 	public void render(Graphics2D bbg)
 	{
 		if(alive)
@@ -192,18 +248,22 @@ public class Player
 	public void setUp(boolean b)
 	{
 		up = b;
+		moving = b;
 	}
 	public void setLeft(boolean b)
 	{
 		left = b;
+		moving = b;
 	}
 	public void setRight(boolean b)
 	{
 		right = b;
+		moving = b;
 	}
 	public void setDown(boolean b)
 	{
 		down = b;
+		moving = b;
 	}
 	public void setState(boolean b)
 	{

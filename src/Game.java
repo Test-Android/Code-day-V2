@@ -28,7 +28,7 @@ public class Game extends JFrame implements Runnable
 		this.setResizable(false);
 		this.setBounds(0,0,GraySpaceMain.WIDTH + getInsets().right,GraySpaceMain.HEIGHT + getInsets().bottom);
 		backBuffer = new BufferedImage(640 + getInsets().right,480 + getInsets().bottom,BufferedImage.TYPE_INT_RGB);
-		player = new Player(0,0,getInsets().left,getInsets().top);
+		player = new Player(0,15,getInsets().left,getInsets().top);
 		grid = new grid((GraySpaceMain.WIDTH / 16), (GraySpaceMain.HEIGHT / 16),player, getInsets().left, getInsets().top);
 		GraySpaceMain.bindKeys(this,player);
 	}
@@ -66,7 +66,7 @@ public class Game extends JFrame implements Runnable
 			
 			//the lower this is the faster the game will go...
 			//250 would be 1/4 of a second... 500 would be a half... 
-			if(nowMilis - lastMilis > 50)
+			if(nowMilis - lastMilis > 100)
 			{
 				update();
 				lastTime = now;
