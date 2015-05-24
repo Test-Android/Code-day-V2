@@ -36,6 +36,10 @@ public class Player
 			System.out.println("YOU WIN!!!");
 			Game.win();
 		}
+		if(x == 0)
+		{
+			Game.loose();
+		}
 		else
 		{
 			if(moving)
