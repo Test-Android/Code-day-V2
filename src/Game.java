@@ -107,7 +107,7 @@ public class Game extends JFrame implements Runnable
         {
         	lose = false;
         	bbg.setFont(new Font("Arial",Font.BOLD,40));
-        	bbg.drawString("You beat level " + level + "!",175,240);
+        	bbg.drawString("You beat level " + level + "!",175,240); 
             g.drawImage(backBuffer, 0, 0, this); 
             try
             {

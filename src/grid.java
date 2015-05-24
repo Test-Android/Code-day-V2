@@ -49,7 +49,7 @@ public class grid
 	{
 		if(createColumn)
 		{
-			if(colPhase == 3)
+			if(colPhase == 1)
 			{
 				createColumn = false;
 			}
@@ -111,7 +111,9 @@ public class grid
 	       		}
 	       		else if(grid[x][y] == 1)
 	       		{
-	       			bbg.setColor(Color.BLACK);
+	       			//Color colorcolor = new Color((int)(Math.random() * 40 + 200), (int)(Math.random()*40 + 200), (int)(Math.random()*30 + 200));
+	       			//bbg.setColor(colorcolor);
+	       			bbg.setColor(Color.ORANGE);
 	       			bbg.fillRect(x *16 + insetLeft, y*16 + insetTop,16,16);
 	       		}
 			}
