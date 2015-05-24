@@ -8,7 +8,7 @@ public class Player
 					left,
 					right,
 					down;
-	private boolean alive, moving;
+	private boolean alive;
 	private int x,
 				y;
 	private int gravity;
@@ -22,7 +22,6 @@ public class Player
 		right = false;
 		down = false;
 		alive = true;
-		moving = false;
 		this.x = x;
 		this.y = y;
 		this.insetsLeft = insetsLeft;
@@ -41,42 +40,39 @@ public class Player
 		}
 		else
 		{
-			if(moving)
+			if(right && x + 1 < 39)
 			{
-				if(right && x + 1 < 39)
+				if(grid.grid[x][y] == 1)
+					x--;
+				else
+					x++;
+			}
+			else if(left && x - 1 >= 0)
+			{
+				if(grid.grid[x][y] == 1)
+					x--;
+				else
+					x--;
+			}
+			else if(up && y - 1 >= 0)
+			{
+				if(grid.grid[x][y] == 1)
 				{
-					if(grid.grid[x][y] == 1)
-						x--;
-					else
-						x++;
+					x--;
+					y--;
 				}
-				else if(left && x - 1 >= 0)
+				else
+					y--;
+			}
+			else if(down && y + 1 < 29)
+			{
+				if(grid.grid[x][y] == 1)
 				{
-					if(grid.grid[x][y] == 1)
-						x--;
-					else
-						x--;
-				}
-				else if(up && y - 1 >= 0)
-				{
-					if(grid.grid[x][y] == 1)
-					{
-						x--;
-						y--;
-					}
-					else
-						y--;
-				}
-				else if(down && y + 1 < 29)
-				{
-					if(grid.grid[x][y] == 1)
-					{
-						x--;
-						y++;
-					}	
-					else
-						y++;
-				}
+					x--;
+					y++;
+				}	
+				else
+					y++;
 			}
 			else
 			{
@@ -88,6 +84,11 @@ public class Player
 		}
 		
 	 }
+	
+	public void checkWalls()
+	{
+		
+	}
 	
 	public void render(Graphics2D bbg)
 	{
@@ -117,22 +118,18 @@ public class Player
 	public void setUp(boolean b)
 	{
 		up = b;
-		moving = b;
 	}
 	public void setLeft(boolean b)
 	{
 		left = b;
-		moving = b;
 	}
 	public void setRight(boolean b)
 	{
 		right = b;
-		moving = b;
 	}
 	public void setDown(boolean b)
 	{
 		down = b;
-		moving = b;
 	}
 	public void setState(boolean b)
 	{

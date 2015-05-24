@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 //this is the main game thread class
 public class Game extends JFrame implements Runnable
@@ -29,7 +30,7 @@ public class Game extends JFrame implements Runnable
 	static boolean win;
 	static int speed;
 	
-	public Game()
+	public Game(int speed)
 	{
 		this.setTitle(NAME);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
@@ -42,7 +43,9 @@ public class Game extends JFrame implements Runnable
 		player = new Player(0,15,getInsets().left,getInsets().top);
 		grid = new grid((GraySpaceMain.WIDTH / 16), (GraySpaceMain.HEIGHT / 16),player, getInsets().left, getInsets().top);
 		
-		speed = 100;
+		this.speed = speed;
+		level = this.speed/10;
+		
 		win = false;
 		GraySpaceMain.bindKeys(this,player);
 	}
