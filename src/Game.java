@@ -91,10 +91,6 @@ public class Game extends JFrame implements Runnable
 	
 	public void update()
 	{
-/*		if(playerX + 1 < 640/16)
-			playerX++;
-		else
-			playerX = 1; */
 		grid.update();
 	}
 	
@@ -102,18 +98,7 @@ public class Game extends JFrame implements Runnable
 	{
 		Graphics2D g = (Graphics2D)getGraphics();
         Graphics2D bbg = (Graphics2D)backBuffer.getGraphics();
-        
-//        bbg.setColor(Color.WHITE);
-        /*bbg.fillRect(0, 0, GraySpaceMain.WIDTH, GraySpaceMain.HEIGHT);  
-        bbg.setColor(Color.black);
-        bbg.fillRect(x, y, 32, 32);*/
-/*        BufferedImage hero = null;
-        try
-        {
-        	hero = ImageIO.read(new File("Code-Day/GraySpace/res/randome3.png"));
-        } catch(Exception e){} */
         bbg.clearRect(0, 0,640 + getInsets().right, getInsets().bottom + 480);
-//      bbg.drawImage(hero,getInsets().top,getInsets().left,hero.getWidth(),hero.getHeight(),null);
         if(!win)
         {
         	grid.render(bbg);
@@ -143,6 +128,8 @@ public class Game extends JFrame implements Runnable
 	public static void lose()
 	{
 		grid.emptyGrid();
+		speed = 100;
+		level = 1;
 	}
 	public void loose()
 	{
