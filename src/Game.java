@@ -80,11 +80,7 @@ public class Game extends JFrame implements Runnable
 			
 			//the lower this is the faster the game will go...
 			//250 would be 1/4 of a second... 500 would be a half... 
-<<<<<<< HEAD
-			if(nowMilis - lastMilis > 100)
-=======
 			if(nowMilis - lastMilis > speed)
->>>>>>> origin/master
 			{
 				update();
 				lastTime = now;
