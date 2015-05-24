@@ -8,6 +8,8 @@ import java.awt.Image;
 public class grid 
 {
 	static int[][] grid ;
+	static Color[][] colours1;
+	static Color[][] colours2;
 	int x ,  y ;
 	final int mutiplyer16bit = 16 ;
 	int insetLeft;
@@ -25,7 +27,11 @@ public class grid
 		this.y = yvalue ;
 		this.p = p;
 		grid = new int[this.x][this.y];
+		colours1 = new Color[40][30];
+		colours2 = new Color[40][30];
+		makeColors(colours1, colours2);
 	}
+	
 	public void setPositionNumAndDraw(Graphics g,int x , int y, int num )
 	{
 		grid[x][y] = num ;
@@ -104,15 +110,23 @@ public class grid
 	 }
 	 public void render(Graphics2D bbg)
 	 {
-		
+		boolean colorChange = true;
 		for(int x = 0; x < this.x; x++)
 		{
 			for(int y = 0; y < this.y; y++)
 			{
 				if(grid[x][y] == 0)
 	       		{
-					Color colorcolor = new Color ((int)(Math.random()*20+75), (int)(Math.random()*20+75), (int)(Math.random()*20+150));
-	       			bbg.setColor(colorcolor);
+					if(colorChange)
+					{
+						bbg.setColor(colours1[x][y]);
+						colorChange = false;
+					}
+					else
+					{
+						bbg.setColor(colours2[x][y]);
+						colorChange = true;
+					}
 	       			bbg.fillRect(x *16 + insetLeft, y*16 + insetTop,16,16);
 	       		}
 	       		else if(grid[x][y] == 1)
@@ -124,5 +138,24 @@ public class grid
 	    }
 		p.render(bbg);
 	 }
-
+	 
+	 private void makeColors(Color[][] colours1, Color[][] colours2)
+	 {
+		 for(int x = 0; x < 40; x++)
+		 {
+			 for(int y = 0; y < 30; y++)
+			 {
+				 Color colorcolor = new Color ((int)(Math.random()*20+75), (int)(Math.random()*20+75), (int)(Math.random()*20+150));
+				 colours1[x][y] = colorcolor;
+			 }
+		 }
+		 for(int x = 0; x < 40; x++)
+		 {
+			 for(int y = 0; y < 30; y++)
+			 {
+				 Color colorcolor = new Color ((int)(Math.random()*20+75), (int)(Math.random()*20+75), (int)(Math.random()*20+150));
+				 colours2[x][y] = colorcolor;
+			 }
+		 }
+	 }
 }
