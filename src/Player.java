@@ -34,6 +34,7 @@ public class Player
 		if(x == 38)
 		{
 			System.out.println("YOU WIN!!!");
+			Game.win();
 		}
 		else
 		{
