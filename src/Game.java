@@ -24,10 +24,10 @@ public class Game extends JFrame implements Runnable
 	BufferedImage backBuffer;
 	Graphics g;
 	Player player;
-	grid grid;
-	int level = 1;
+	static grid grid;
+	static int level = 1;
 	static boolean win;
-	int speed;
+	static int speed;
 	
 	public Game()
 	{
@@ -128,7 +128,6 @@ public class Game extends JFrame implements Runnable
             {
             	thread.sleep(5000);
             	win = false;
-            	speedUp();
             	grid.emptyGrid();
             } catch(Exception e){}
 
@@ -137,11 +136,13 @@ public class Game extends JFrame implements Runnable
 	public static void win()
 	{
 		win = true;
-	}
-	public void speedUp()
-	{
 		level++;
 		speed-=10;
+		
+	}
+	public static void lose()
+	{
+		grid.emptyGrid();
 	}
 	public void loose()
 	{

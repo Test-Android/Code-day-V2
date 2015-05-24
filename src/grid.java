@@ -94,26 +94,20 @@ public class grid
 					cont = false;
 				}
 			}
-			columnCount++;	
 		}
 	}
 	 public void update()
 	 {
-		if(columnCount != 20)
+		for(int x = 0; x < this.x - 1; x++)
 		{
-			for(int x = 0; x < this.x - 1; x++)
+			for(int y =0; y < this.y; y++)
 			{
-				for(int y =0; y < this.y; y++)
-				{
-					grid[x][y] = grid[x + 1][y];
-					grid[x+1][y] = 0;
-				}
+				grid[x][y] = grid[x + 1][y];
+				grid[x+1][y] = 0;
 			}
-			updatePlayer();
-			makenewcolumn();
 		}
-		else
-			Game.win();
+		updatePlayer();
+		makenewcolumn();
 	 }
 	 public void render(Graphics2D bbg)
 	 {
